@@ -4,7 +4,7 @@ Set machine-specific and os-specific settings.
 
 ### Configuration example
 Computer hostname has higher priority than OS. It *currently* doesn't support inheritance.
-`settings.json`
+<br/>`settings.json`
 ```json
 {
   "platformSettings.platforms": {
