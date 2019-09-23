@@ -3,19 +3,27 @@
 Set machine-specific and os-specific settings.
 
 ### Configuration example
-Computer hostname has higher priority than OS. It *currently* doesn't support inheritance.
+Computer hostname has higher priority than OS.
 <br/>`settings.json`
 ```json
 {
+  "platformSettings.autoLoad": true,
   "platformSettings.platforms": {
     "win32": {
-      "editor.lineNumbers": "on"
+      "nodes": {
+        "workspaceExplorer.workspaceStorageDirectory": "%userprofile%\\.vscode_workspaces"
+      }
     },
     "linux": {
-      "editor.lineNumbers": "relative"
+      "nodes": {
+        "workspaceExplorer.workspaceStorageDirectory": "~/.vscode_workspaces"
+      }
     },
-    "mycomputer": {
-      "editor.lineNumbers": "relative"
+    "myWinPC": {
+      "inherits": "win32",
+      "nodes": {
+        "workspaceExplorer.workspaceStorageDirectory": "C:\\Users\\userame\\.vscode_workspaces"
+      }
     }
   }
 }

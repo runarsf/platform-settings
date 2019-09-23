@@ -1,0 +1,38 @@
+"platformSettings.platforms": {
+  "type": "array",
+  "title": "a",
+  "description": "Platform definitions.",
+  "items": {
+    "type": "object",
+    "title": "command sequence",
+    "description": "asd",
+    "properties": {
+      "platform": {
+        "type": "string",
+        "title": "n",
+        "description": "Platform definition.",
+        "default": ""
+      },
+      "inherits": {
+        "type": [
+          "string",
+          "array"
+        ],
+        "title": "n",
+        "description": "Inherit from platform.",
+        "default": ""
+      },
+      "settings": {
+        "type": "object",
+        "title": "n",
+        "description": "The settings to be loaded.",
+        "default": {},
+        "items": {
+          "type": "object",
+          "title": "n",
+          "description": "The individual setting nodes to be loaded."
+        }
+      }
+    }
+  }
+}

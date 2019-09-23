@@ -1,22 +1,26 @@
 const vscode = require('vscode');
 const os = require('os');
 
-function updateSettings () {
+function loadSettings (platform) {
+  const settingNodes = vscode.workspace.getConfiguration('platformSettings').platforms[platform].nodes;
+  const config = vscode.workspace.getConfiguration();
+  
+  console.log(`Loading settings for ${platform}.`);
+  Object.keys(settingNodes).forEach(function (key) {
+    console.log(` - ${key}: ${settingNodes[key]}`);
+    config.update(String(key), settingNodes[key], 1);
+  });
+}
+
+function updateSettings() {
   const config = vscode.workspace.getConfiguration('platformSettings');
-  const codeConfig = vscode.workspace.getConfiguration();
 
   let platform;
   if (String(os.platform) in config.platforms) platform = String(os.platform);
   if (String(os.hostname()) in config.platforms) platform = String(os.hostname());
+  if (config.platforms[platform].inherits) loadSettings(config.platforms[platform].inherits);
 
-  if (platform) {
-    const platformSettings = config.platforms[platform];
-    console.log(`Loading settings for ${platform}.`);
-    Object.keys(platformSettings).forEach(function (key) {
-      console.log(`${key}: ${platformSettings[key]}`);
-      codeConfig.update(String(key), platformSettings[key], 1);
-    });
-  }
+  if (platform) loadSettings(platform);
 }
 
 /**
@@ -27,7 +31,7 @@ function activate(context) {
     updateSettings();
   });
 
-  updateSettings();
+  if (vscode.workspace.getConfiguration('platformSettings').autoLoad) updateSettings();
 
   context.subscriptions.push(refreshSettings);
 }

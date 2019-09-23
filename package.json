@@ -5,7 +5,7 @@
   "author": "runarsf",
   "license": "ISC",
   "description": "Platform-specific VSCode settings.",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "engines": {
     "vscode": "^1.38.0"
   },
@@ -25,13 +25,19 @@
     ],
     "configuration": {
       "properties": {
+        "platformSettings.autoLoad": {
+          "type": "boolean",
+          "default": false,
+          "description": "Specifies whether platform-settings should be applied automatically on startup."
+        },
         "platformSettings.platforms": {
           "type": "object",
           "default": {},
+          "title": "Platform definitions",
+          "description": "Define each platform (os and machines).",
           "items": {
             "type": "object"
-          },
-          "description": "Custom platform settings."
+          }
         }
       }
     }
