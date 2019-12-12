@@ -6,27 +6,30 @@ function loadSettings (platform) {
   const config = vscode.workspace.getConfiguration();
   
   console.log(`Loading settings for ${platform}.`);
-  Object.keys(settingNodes).forEach(function (key) {
+  Object.keys(settingNodes).forEach((key) => {
     console.log(` - ${key}: ${settingNodes[key]}`);
     config.update(String(key), settingNodes[key], 1);
   });
 }
 
-function updateSettings() {
+function updateSettings () {
   const config = vscode.workspace.getConfiguration('platformSettings');
 
   let platform;
-  if (String(os.platform) in config.platforms) platform = String(os.platform);
-  if (String(os.hostname()) in config.platforms) platform = String(os.hostname());
-  if (config.platforms[platform].inherits) loadSettings(config.platforms[platform].inherits);
+  if (os.platform() in config.platforms) platform = os.platform();
+  if (os.hostname() in config.platforms) platform = os.hostname();
+  if (String(eval(config.condition)) in config.platforms) platform = String(eval(config.condition));
+  if (platform) {
+    if (config.platforms[platform].inherits) loadSettings(config.platforms[platform].inherits);
 
-  if (platform) loadSettings(platform);
+    loadSettings(platform);
+  }
 }
 
 /**
  * @param {vscode.ExtensionContext} context
  */
-function activate(context) {
+function activate (context) {
   let refreshSettings = vscode.commands.registerCommand('extension.refreshSettings', function () {
     updateSettings();
   });
@@ -37,7 +40,7 @@ function activate(context) {
 }
 exports.activate = activate;
 
-function deactivate() {}
+function deactivate () {}
 module.exports = {
   activate,
   deactivate

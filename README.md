@@ -2,27 +2,83 @@
 
 Set machine-specific and os-specific settings.
 
+
+### Commands
+
+  * "Refresh platform settings." (`extension.refreshSettings`)
+    * Used to manually refresh platform settings (useful if `platformSettings.autoLoad` is set to `false`)
+
 ### Configuration example
-Computer hostname has higher priority than OS.
-<br/>`settings.json`
+
+To see which settings are being changed, take a look in the [Debug Console](https://code.visualstudio.com/docs/editor/debugging).
+
+Valid *platforms* (ordered by priority):
+  1. Custom condition (e.g. `os.release()`)
+  2. Computer hostname (e.g. `myWinPC`)
+  3. Operating system (`linux`, `win32`, `darwin`, `freebsd`, `sunos`)
+  4. Inheritance (one level)
+
+<br />Example 1 (`settings.json`):
 ```json
 {
   "platformSettings.autoLoad": true,
   "platformSettings.platforms": {
     "win32": {
       "nodes": {
-        "workspaceExplorer.workspaceStorageDirectory": "%userprofile%\\.vscode_workspaces"
+        "editor.lineNumbers": "on"
       }
     },
     "linux": {
       "nodes": {
-        "workspaceExplorer.workspaceStorageDirectory": "~/.vscode_workspaces"
+        "editor.lineNumbers": "relative"
+      }
+    }
+  }
+}
+```
+
+<br />Example 2 (`settings.json`):
+```json
+{
+  "platformSettings.autoLoad": true,
+  "platformSettings.condition": "os.release()",
+  "platformSettings.platforms": {
+    "win32": {
+      "inherits": "default",
+      "nodes": {
+        "workspaceExplorer.workspaceStorageDirectory": "%userprofile%\\.vscode_workspaces",
+        "editor.lineNumbers": "on"
+      }
+    },
+    "linux": {
+      "inherits": "default",
+      "nodes": {
+        "workspaceExplorer.workspaceStorageDirectory": "~/.vscode_workspaces",
+        "editor.lineNumbers": "relative"
+      }
+    },
+    "darwin": {
+      "inherits": "linux",
+      "nodes": {
+        "workspaceExplorer.workspaceStorageDirectory": "~/.vscode_workspaces",
+        "editor.lineNumbers": "off"
       }
     },
     "myWinPC": {
       "inherits": "win32",
       "nodes": {
         "workspaceExplorer.workspaceStorageDirectory": "C:\\Users\\userame\\.vscode_workspaces"
+      }
+    },
+    "10.0.18362": {
+      "inherits": "myWinPC",
+      "nodes": {
+        "workspaceExplorer.workspaceStorageDirectory": "%userprofile%\\.vscode_workspaces"
+      }
+    },
+    "default": {
+      "nodes": {
+        "editor.lineNumbers": "on"
       }
     }
   }
@@ -32,3 +88,12 @@ Computer hostname has higher priority than OS.
 ## Release Notes
 
 See [CHANGELOG.md](https://github.com/runarsf/platform-settings/blob/master/CHANGELOG.md) for release notes.
+
+## Known Bugs & Limitations
+
+  * Inheritance isn't recursive, which means only one level of inheritance will be loaded.
+
+<br />
+
+> **platform-settings** © [runarsf](https://github.com/runarsf) · Author and maintainer.<br />
+> Released under the [ISC](https://opensource.org/licenses/ISC) [License](https://github.com/runarsf/platform-settings/blob/master/LICENSE).

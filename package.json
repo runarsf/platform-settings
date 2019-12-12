@@ -5,7 +5,7 @@
   "author": "runarsf",
   "license": "ISC",
   "description": "Platform-specific VSCode settings.",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "engines": {
     "vscode": "^1.38.0"
   },
@@ -29,6 +29,11 @@
           "type": "boolean",
           "default": false,
           "description": "Specifies whether platform-settings should be applied automatically on startup."
+        },
+        "platformSettings.condition": {
+          "type": "string",
+          "default": "",
+          "description": "Specify a custom NodeJS condition."
         },
         "platformSettings.platforms": {
           "type": "object",
