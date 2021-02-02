@@ -2,23 +2,24 @@
 
 Set machine-specific and os-specific settings.
 
-
 ### Commands
 
-  * "Refresh platform settings." (`extension.refreshSettings`)
-    * Used to manually refresh platform settings (useful if `platformSettings.autoLoad` is set to `false`)
+- "Refresh platform settings." (`extension.refreshSettings`)
+  - Used to manually refresh platform settings (useful if `platformSettings.autoLoad` is set to `false`)
 
 ### Configuration example
 
 To see which settings are being changed, take a look in the [Debug Console](https://code.visualstudio.com/docs/editor/debugging).
 
-Valid *platforms* (ordered by priority):
-  1. Custom condition (e.g. `os.release()`)
-  2. Computer hostname (e.g. `myWinPC`)
-  3. Operating system (`linux`, `win32`, `darwin`, `freebsd`, `sunos`)
-  4. Inheritance (one level)
+Valid _platforms_ (ordered by priority):
+
+1. Custom condition (e.g. `os.release()`)
+2. Computer hostname (e.g. `myWinPC`)
+3. Operating system (`linux`, `win32`, `darwin`, `freebsd`, `sunos`)
+4. Inheritance (one level)
 
 <br />Example 1 (`settings.json`):
+
 ```json
 {
   "platformSettings.autoLoad": true,
@@ -38,6 +39,7 @@ Valid *platforms* (ordered by priority):
 ```
 
 <br />Example 2 (`settings.json`):
+
 ```json
 {
   "platformSettings.autoLoad": true,
@@ -89,9 +91,9 @@ Valid *platforms* (ordered by priority):
 
 See [CHANGELOG.md](https://github.com/runarsf/platform-settings/blob/master/CHANGELOG.md) for release notes.
 
-## Known Bugs & Limitations
+## Known Issues & Limitations
 
-  * Inheritance isn't recursive, which means only one level of inheritance will be loaded.
+- Inheritance isn't recursive, which means only one level of inheritance will be loaded.
 
 <br />
 
