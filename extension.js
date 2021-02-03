@@ -8,7 +8,7 @@
  * @todo Improve contributed settings.
  * @todo Convert to typescript.
  * @todo Turn Settings into a class, make channel a private variable, and add loadSettings as a method of the class.
- * @todo Accept pull requests from dependabot.
+ * COMPLETE: Accept pull requests from dependabot.
  * COMPLETE: Add `remove` option under platformSettings.[platform].
  * COMPLETE: Replace console.log with channel log.
  * COMPLETE: Don't import entire library, only what is needed. { workspace }
@@ -17,7 +17,6 @@ const { workspace, window, commands } = require("vscode");
 const os = require("os");
 let channel = window.createOutputChannel("platform-settings");
 
-//  Inspiration: https://github.com/vscode-restructuredtext/vscode-restructuredtext/blob/460f9f37cdf048e4c30d2705ff9b89ebd03f535b/src/extension.ts
 function loadSettings(platform) {
   const settingNodes = workspace.getConfiguration("platformSettings").platforms[
     platform
