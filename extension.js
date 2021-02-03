@@ -2,15 +2,14 @@
 /**
  * @todo Prepare for release 1.0.0.
  *   - [ ] Changelog.
- *   - [ ] Bump version number.
- *   - [ ] Add icon.
- *   - [ ] Complete all TODOs.
- *   - [ ] Dev docs: semantic versioning.
- *   - [ ] Dev docs: debugging.
- *   - [ ] Dev docs: updating.
+ *   - [x] Bump version number.
+ * @todo Add icon.
+ * @todo Improve development docs - semantic versioning, debugging, updating.
+ * @todo Improve contributed settings.
  * @todo Convert to typescript.
- * @todo Add `deleteNode` option under platformSettings.[platform].
  * @todo Turn Settings into a class, make channel a private variable, and add loadSettings as a method of the class.
+ * @todo Accept pull requests from dependabot.
+ * COMPLETE: Add `remove` option under platformSettings.[platform].
  * COMPLETE: Replace console.log with channel log.
  * COMPLETE: Don't import entire library, only what is needed. { workspace }
  */
@@ -33,11 +32,13 @@ function loadSettings(platform) {
     channel.appendLine(`  + ${key}: ${settingNodes[key]}`);
     config.update(String(key), settingNodes[key], 1);
   });
-  Object.keys(removeNodes).forEach((key) => {
-    channel.appendLine(`  - ${key}: ${removeNodes[key]}`);
-    // FIXME: Remove, don't update.
-    config.update(String(key), removeNodes[key], 1);
-  });
+  // TODO: Support more than top-level nodes.
+  if (removeNodes) {
+    removeNodes.forEach((item, _) => {
+      channel.appendLine(`  - ${item}`);
+      config.update(String(item), undefined, 1);
+    });
+  }
 }
 
 function updateSettings() {

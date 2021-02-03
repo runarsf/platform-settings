@@ -11,7 +11,7 @@ Set machine-specific and os-specific settings.
 
 ### Configuration example
 
-To see which settings are being changed, take a look in the [Debug Console](https://code.visualstudio.com/docs/editor/debugging).
+To see which settings are being changed/removed, use the command palette (<kbd>ctrl</kbd>+<kbd>P</kbd>) and enter `>Output: Focus on Output View`. In the dropdown menu, select `platform-settings`.
 
 Valid _platforms_ (ordered by priority):
 
@@ -32,9 +32,8 @@ Valid _platforms_ (ordered by priority):
       }
     },
     "linux": {
-      "nodes": {
-        "editor.lineNumbers": "relative"
-      }
+      // WARNING: Only supports top-level settings, and is experimental. Use with caution.
+      "remove": ["editor.lineNumbers"]
     }
   }
 }
@@ -47,12 +46,18 @@ Valid _platforms_ (ordered by priority):
   "platformSettings.autoLoad": true,
   "platformSettings.condition": "os.release()",
   "platformSettings.platforms": {
+    "default": {
+      "nodes": {
+        "editor.lineNumbers": "on"
+      }
+    },
     "win32": {
       "inherits": "default",
       "nodes": {
         "workspaceExplorer.workspaceStorageDirectory": "%userprofile%\\.vscode_workspaces",
         "editor.lineNumbers": "on"
-      }
+      },
+      "remove": ["platformSettings.placebo"]
     },
     "linux": {
       "inherits": "default",
@@ -79,11 +84,6 @@ Valid _platforms_ (ordered by priority):
       "nodes": {
         "workspaceExplorer.workspaceStorageDirectory": "%userprofile%\\.vscode_workspaces"
       }
-    },
-    "default": {
-      "nodes": {
-        "editor.lineNumbers": "on"
-      }
     }
   }
 }
@@ -96,10 +96,6 @@ See [CHANGELOG.md](https://github.com/runarsf/platform-settings/blob/master/CHAN
 ## Known Issues & Limitations
 
 - Inheritance isn't recursive, which means only one level of inheritance will be loaded.
-
-### Debugging
-
-Use the command palette (<kbd>ctrl</kbd>+<kbd>shift</kbd>+<kbd>P</kbd>) and enter `Output: Focus on Output View`. In the dropdown menu select `platform-settings`.
 
 <br />
 

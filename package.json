@@ -5,7 +5,7 @@
   "author": "runarsf",
   "license": "ISC",
   "description": "Platform-specific VSCode settings.",
-  "version": "0.0.3",
+  "version": "1.0.0",
   "engines": {
     "vscode": "^1.38.0"
   },
@@ -24,25 +24,28 @@
       }
     ],
     "configuration": {
+      "type": "object",
+      "title": "Platform Settings",
       "properties": {
+        "platformSettings.platforms": {
+          "type": "object",
+          "title": "Platform definitions.",
+          "markdownDescription": "Define each platform. Supports operating system (`linux`, `win32`, `darwin`, `freebsd`, and `sunos`), computer `hostname`, and custom NodeJS condition if `platformSettings.condition` is specified. Each platform supports `nodes{}` and `remove[]`."
+        },
         "platformSettings.autoLoad": {
           "type": "boolean",
-          "default": false,
-          "description": "Specifies whether platform-settings should be applied automatically on startup."
+          "title": "Automatically load platform settings.",
+          "markdownDescription": "Specifies whether platform-settings should be applied automatically on startup.",
+          "default": false
+        },
+        "platformSettings.placebo": {
+          "type": "string",
+          "title": "Used for testing."
         },
         "platformSettings.condition": {
           "type": "string",
-          "default": "",
-          "description": "Specify a custom NodeJS condition."
-        },
-        "platformSettings.platforms": {
-          "type": "object",
-          "default": {},
-          "title": "Platform definitions",
-          "description": "Define each platform (os and machines).",
-          "items": {
-            "type": "object"
-          }
+          "title": "Custom condition.",
+          "markdownDescription": "Specify a custom NodeJS condition. For example `os.release()`."
         }
       }
     }
@@ -52,7 +55,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/runarsf/vsfloof.git"
+    "url": "git+https://github.com/runarsf/platform-settings.git"
   },
   "bugs": {
     "url": "https://github.com/runarsf/platform-settings/issues"
