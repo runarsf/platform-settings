@@ -1,5 +1,7 @@
 # platform-settings
 
+[![Visual Studio Marketplace](https://vsmarketplacebadge.apphb.com/version-short/runarsf.platform-settings.svg?style=flat)](https://marketplace.visualstudio.com/items?itemName=runarsf.platform-settings) [![Visual Studio Marketplace](https://vsmarketplacebadge.apphb.com/installs-short/runarsf.platform-settings.svg?style=flat)](https://marketplace.visualstudio.com/items?itemName=runarsf.platform-settings)
+
 Set machine-specific and os-specific settings.
 
 ### Commands
@@ -94,6 +96,10 @@ See [CHANGELOG.md](https://github.com/runarsf/platform-settings/blob/master/CHAN
 ## Known Issues & Limitations
 
 - Inheritance isn't recursive, which means only one level of inheritance will be loaded.
+
+### Debugging
+
+Use the command palette (<kbd>ctrl</kbd>+<kbd>shift</kbd>+<kbd>P</kbd>) and enter `Output: Focus on Output View`. In the dropdown menu select `platform-settings`.
 
 <br />
 

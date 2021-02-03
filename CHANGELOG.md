@@ -18,7 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Improved code formatting.
 - Improved _documentation_.
 - Added dev docs to README.
-- Moved logs to own log panel.
+- Moved logs to own log panel (`platform-settings`).
 - Bumped major version to 1.0.0.
 
 ### Fixed
